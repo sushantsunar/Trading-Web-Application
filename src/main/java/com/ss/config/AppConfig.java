@@ -1,2 +1,31 @@
-package com.ss.config;public class AppConfig {
+package com.ss.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.http.SessionCreationPolicy;
+import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
+import org.springframework.web.cors.CorsConfigurationSource;
+
+@Configuration
+public class AppConfig {
+    // Add any additional configuration for the application here
+
+    //this is a code to set our own password when we want to login the to spring boot app otherwise we have to use the generated secure password
+    @Bean
+    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http.sessionManagement(management-> management.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authorizeHttpRequests(Authorizae-> Authorizae.requestMatchers("/api/**").authenticated()
+                        .anyRequest().permitAll())
+                .addFilterBefore(new JwtTokenValidator(), BasicAuthenticationFilter.class)
+                .csrf(csrf-> csrf.disable())
+                .cors(cors-> cors.configurationSource(corsConfigurationSource()))
+        ;
+        return http.build();
+    }
+
+    private CorsConfigurationSource corsConfigurationSource() {
+        return null;
+    }
 }
