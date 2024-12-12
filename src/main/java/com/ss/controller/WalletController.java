@@ -47,6 +47,21 @@ public class WalletController {
         return new ResponseEntity<>(wallet, HttpStatus.ACCEPTED);
     }
 
+/*
+      @PutMapping("/api/wallet/order/{orderId}/pay")
+    public ResponseEntity<Wallet> payOrderPayment(
+            @RequestHeader("Authorization") String jwt,
+            @PathVariable Long orderId
+    ) throws Exception {
+        User user = userService.findUserProfileByJwt(jwt);
 
+        Order order = orderService.getOrderById(orderId);
+
+        Wallet wallet = walletService.payOrderPayment(
+                order, user);
+
+        return new ResponseEntity<>(wallet, HttpStatus.ACCEPTED);
+    }
+*/
 
 }
