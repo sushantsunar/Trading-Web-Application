@@ -23,7 +23,7 @@ public interface OrderService {
     @Transactional
     Order sellAsset(Coin coin, double quantity, User user) throws Exception;
 
-    Order processOrder(Coin coin, double quantity, OrderType orderType) throws Exception;
+    Order processOrder(Coin coin, double quantity, OrderType orderType, User user) throws Exception;
 
 
 }

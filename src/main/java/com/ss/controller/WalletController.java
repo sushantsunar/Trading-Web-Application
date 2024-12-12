@@ -4,6 +4,7 @@ import com.ss.model.Order;
 import com.ss.model.User;
 import com.ss.model.Wallet;
 import com.ss.model.WalletTransaction;
+import com.ss.service.OrderService;
 import com.ss.service.UserService;
 import com.ss.service.WalletService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,9 @@ public class WalletController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private OrderService orderService;
 
     @GetMapping("/api/wallet")
     public ResponseEntity<Wallet> getUserWallet(@RequestHeader("Authorization") String jwt) throws Exception {
@@ -47,7 +51,7 @@ public class WalletController {
         return new ResponseEntity<>(wallet, HttpStatus.ACCEPTED);
     }
 
-/*
+
       @PutMapping("/api/wallet/order/{orderId}/pay")
     public ResponseEntity<Wallet> payOrderPayment(
             @RequestHeader("Authorization") String jwt,
@@ -62,6 +66,6 @@ public class WalletController {
 
         return new ResponseEntity<>(wallet, HttpStatus.ACCEPTED);
     }
-*/
+
 
 }
